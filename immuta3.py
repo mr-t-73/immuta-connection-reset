@@ -121,7 +121,7 @@ if __name__ == "__main__":
                     # Extract the schema detail
                     schema = project_details.get('schema')
                     
-                    # Make a request to get the data sources for each project, we are getting just the database detail.  There could be other endpoints that are more efficient.  This is just an example on one of the way to get the database info.
+                    # Make a request to get the data sources for each project, we are getting just the database detail
                     url_project_data_sources = f'https://{host}{project_endpoint}/{project_id}/dataSources'
                     response_data_sources = requests.get(url_project_data_sources, headers=headers)
                     
@@ -145,6 +145,7 @@ if __name__ == "__main__":
                             if response_add_owner_to_each_data_source.status_code != 200:
                                 print(f"Failed to update owner. Status Code: {response_add_owner_to_each_data_source.status_code}")
                                 print(response_add_owner_to_each_data_source.text)
+                                
                         # Extract the connection string from the first data source
                         connection_string = None
                         if data_sources.get('dataSources'):
@@ -181,7 +182,6 @@ if __name__ == "__main__":
                             # Convert payload to JSON string with double quotes
                             json_payload = json.dumps(payload, indent=2)
                             # print(json_payload)
-                            # Uncomment this section when ready to execute the PUT request; i tested this with an if-condition for a project_id == xxx.
                             response_put = requests.put(bulk_endpoint, headers=headers, data=json_payload)
                             #if response_put.status_code == 200:
                             #    print(f"Schema project connnection updated")
